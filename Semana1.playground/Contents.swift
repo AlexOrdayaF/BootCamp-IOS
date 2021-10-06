@@ -238,3 +238,96 @@ car2.model = "Yaris"
 
 print(car1.model)
 print(car2.model)
+
+
+/// Clase 2
+
+print("\("\n\n\n\n\n\n- Segunda clase:")")
+
+class A {
+    let name: String
+    init(name: String) { //designated initializer
+        self.name = name
+    }
+}
+
+let a = A(name: "Saul")
+
+class B: A {
+    let height: Int
+    
+    init(name: String, height: Int) {
+        self.height = height
+        super.init(name: name)
+    }
+}
+
+let b = B(name: "Pati", height: 170)
+print(b.name)
+print(b.height)
+
+
+class C {
+    
+    var name: String
+    init(name: String) { //designated initializer
+        self.name = name
+    }
+    
+    convenience init() { // convenience initializer
+        self.init(name: "Saul")
+    }
+    
+}
+
+class D: C {
+    
+    enum PersonType {
+        case single
+        case married
+    }
+    
+    let height: Int
+    
+    init(height: Int, name: String) {
+        self.height = height
+        super.init(name: name)
+    }
+    
+    convenience init(type: PersonType) {
+        
+        var height: Int = 0
+        var name: String = ""
+        
+        switch type {
+        case .single:
+            height = 170
+            name = "Pati"
+        case .married:
+            height = 165
+            name = "Saul"
+        }
+        
+        self.init(height: height, name: name)
+    }
+    
+}
+
+let d = D(type: .single)
+
+class E: C {
+    
+    override init(name: String) {
+        super.init(name: name)
+        self.name = "Pablo"
+    }
+    
+    deinit {
+        print("Se eliminó la instancia de la clase `E`")
+    }
+    
+}
+
+var valorE: E? = E(name: "Norma")
+print(valorE?.name)
+valorE = nil
